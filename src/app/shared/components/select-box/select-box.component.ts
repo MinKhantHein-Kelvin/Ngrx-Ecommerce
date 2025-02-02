@@ -1,13 +1,13 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-input-box',
-  templateUrl: './input-box.component.html',
-  styleUrl: './input-box.component.scss',
+  selector: 'app-select-box',
+  templateUrl: './select-box.component.html',
+  styleUrl: './select-box.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputBoxComponent implements OnInit {
+export class SelectBoxComponent {
   @Input() isReactiveForm: boolean = false;
   @Input() control!: FormControl;
   @Input() options: any[] = [];

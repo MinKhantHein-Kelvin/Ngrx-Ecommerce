@@ -37,11 +37,16 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              },"src/assets"
+              },
+              "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "node_modules/primeng/resources/themes/lara-dark-indigo/theme.css",
+              "node_modules/primeng/resources/primeng.min.css"
             ],
             "scripts": []
           },
@@ -104,9 +109,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              },"src/assets"
+              },
+              "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -116,6 +123,9 @@
     }
   },
   "cli": {
-    "analytics": "928f8913-190d-4643-9eab-5550e06b4e7a"
+    "analytics": "928f8913-190d-4643-9eab-5550e06b4e7a",
+    "schematicCollections": [
+      "@ngrx/schematics"
+    ]
   }
 }

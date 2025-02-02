@@ -1,6 +1,10 @@
-<button type="submit" [disabled]="isLoading" *ngIf="isLoading" class="btn btn-sm"  [ngClass]="{'btn-blue': !isCancle,'btn-cancel' : isCancle, 'radius-button' : isRadiusbutton}" [ngStyle]="{'width': width+ '%'}"><i class="fas fa-circle-notch fa-spin"></i>&nbsp;<span>{{load_button_text}}</span>
+<button type="submit" [disabled]="isLoading" *ngIf="isLoading" class="btn btn-sm"
+  [ngClass]="{'btn-blue': !isCancle,'btn-cancel' : isCancle, 'radius-button' : isRadiusbutton}"
+  [ngStyle]="{'width': width+ '%'}"><i class="fas fa-circle-notch fa-spin"></i>&nbsp;<span>{{load_button_text}}</span>
 </button>
 
-<button type="submit" *ngIf="!isLoading" class="btn btn-sm" [disabled]="isDisabled" [ngClass]="{'btn-blue': !isCancle,'btn-cancel' : isCancle, 'radius-button' : isRadiusbutton}" [ngStyle]="{'width': width+ '%'}" (click)="handleClick()">
+<button type="submit" *ngIf="!isLoading" class="btn btn-sm" [disabled]="isDisabled"
+  [ngClass]="{'btn-blue': !isCancle,'btn-cancel' : isCancle, 'radius-button' : isRadiusbutton}"
+  [ngStyle]="{'width': width+ '%'}" (click)="handleClick()">
   <span>{{button_text}}</span>
 </button>

@@ -1,0 +1,79 @@
+mat-sidenav-container {
+  height: 100vh;
+  background: #202231;
+  position: relative;
+
+  mat-sidenav{
+    background-color: var(--secondary-color);
+    border-radius: 0px;
+
+    .image-wrapper{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .logo{
+        width: 50%;
+        height: auto;
+      }
+
+      .logothumbnail{
+        width: 50% !important;
+        height: auto !important;
+        // margin: 20px auto 20px !important;
+        display: flex !important;
+      }
+    }
+
+
+
+
+    .menuitem{
+      cursor: pointer;
+      color: #FFFFFF;
+      opacity: 0.7;
+
+      &:hover{
+        background-color: #5a5d65;
+        transition: background-color 0.3s ease;
+      }
+
+      .collese-margin{
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+
+      img{
+        width: 20px;
+      }
+    }
+
+    .active-menu {
+      background: #3A3D4D;
+      border-left: 4px solid var(--error-message-color);
+      font-weight: bold;
+      opacity: 1;
+    }
+  }
+
+  mat-toolbar{
+    background-color: #202231;
+  }
+}
+
+.mat-sidenav ::ng-deep {
+  &::-webkit-scrollbar {
+    width: 6px !important;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 4px !important;
+    background-color:  var(--primary-color) !important;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 0px !important;
+    background-color: #757575 !important;
+  }
+}
+
+

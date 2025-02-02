@@ -1,0 +1,22 @@
+<p-table [value]="tableDataSource" [rows]="10" [tableStyle]="{'min-width': '50rem'}" >
+  <!-- Table Header -->
+  <ng-template pTemplate="header">
+    <tr>
+      <th *ngFor="let item of tableHeaderArray"
+          [ngClass]="{'text-end': item.type == 'number'}"
+          [ngStyle]="{ width: item.width + '%' }">
+        {{ item.header }}
+      </th>
+    </tr>
+  </ng-template>
+
+  <!-- Table Body -->
+  <ng-template pTemplate="body" let-row>
+    <tr>
+      <td *ngFor="let cell of tableHeaderArray"
+          [ngClass]="{'text-end': cell.type == 'number'}">
+        <span>{{ row[cell.fieldname] }}</span>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

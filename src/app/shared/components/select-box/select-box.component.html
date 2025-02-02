@@ -1,13 +1,19 @@
 @if (isReactiveForm && control){
-  <label class="col-form-label col-form-label-sm" *ngIf="label">
+  <label class="col-form-label col-form-label-sm"  *ngIf="label">
     {{ label }} <span class="require-color" *ngIf="isEssential">*</span>
   </label>
-  <input type="text" class="form-control" [formControl]="control" [ngClass]="{ 'is-invalid': showError }"/>
+  <select class="form-select form-select-sm w-100" [formControl]="control" [disabled]="isDisabled"
+    [ngClass]="{ 'is-invalid': showError }">
+    <ng-container *ngFor="let item of options">
+      <option [value]="item[valueKey]">{{ item[labelKey] }}</option>
+    </ng-container>
+  </select>
   <div *ngIf="showError" class="invalid-feedback">
     <div *ngIf="control.hasError('required')" class="error-message">
       {{ errorMessage }}
     </div>
   </div>
+
   }@else {
   <!-- <label *ngIf="label" class="mb-2">{{ label }} </label>
   <select class="form-select form-select-sm w-100" [formControl]="control" [disabled]="isDisabled" [(ngModel)]="value" (ngModelChange)="valueChanges($event)">

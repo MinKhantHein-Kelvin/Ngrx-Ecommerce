@@ -1,0 +1,36 @@
+<mat-sidenav-container>
+  <mat-sidenav opened mode="side" [style.width]="sidenavWidth()">
+    <div class="image-wrapper">
+      <img class="logo mt-4 mb-4" [ngClass]="{'logothumbnail': isCollapsed}"
+      src="./assets/images/logo/ecommerce-logo.png" alt="ecommerce-logo">
+    </div>
+    <mat-divider></mat-divider>
+
+    <ng-container *ngFor="let item of sideBarItemList">
+      <div class="pt-3 pb-3 d-flex align-items-center menuitem" mat-button [ngClass]="{'justify-content-center': isCollapsed}"  matTooltip="{{!isCollapsed ? '' : item.label}}" matTooltipPosition="right" [routerLink]="item.route" routerLinkActive="active-menu" [routerLinkActiveOptions]="{ exact: true }">
+        <div class="ms-4" [ngClass]="{'collese-margin': isCollapsed}">
+          <img src="{{item.iconActive}}" alt="icon" class="me-2">
+          <span class="ms-2" *ngIf="!isCollapsed">{{item.label}}</span>
+        </div>
+      </div>
+    </ng-container>
+  </mat-sidenav>
+  <mat-sidenav-content [style.margin-left]="sidenavWidth()" >
+    <mat-toolbar color="primary" class="mat-elevation-z2 d-flex justify-content-between align-items-center"
+      [ngClass]="{'toolbar-width': !isCollapsed}">
+      <div class="d-flex justify-content-center align-items-center px-3">
+        <button mat-icon-button class="me-2 ms-1" (click)="toggleCollapsed()">
+          <mat-icon class="me-2 text-light" *ngIf="isCollapsed">menu</mat-icon>
+          <mat-icon class="me-2 text-light" *ngIf="!isCollapsed">menu_open</mat-icon>
+        </button>
+        <span class="headertitle  text-light">Dashboard</span>
+      </div>
+      <div class="d-flex justify-content-center align-items-center">
+        <!-- <span class="textfont cursor-pointer logout" (click)="adminAuthService.LogOut()">Log Out</span> -->
+      </div>
+    </mat-toolbar>
+    <section class="sidenav-container px-5 py-3">
+        <router-outlet></router-outlet>
+    </section>
+  </mat-sidenav-content>
+</mat-sidenav-container>
