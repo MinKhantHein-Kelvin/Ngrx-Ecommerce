@@ -1,6 +1,6 @@
 mat-sidenav-container {
   height: 100vh;
-  background: #202231;
+  background: hsl(233, 21%, 16%);
   position: relative;
 
   mat-sidenav{
@@ -23,9 +23,6 @@ mat-sidenav-container {
         display: flex !important;
       }
     }
-
-
-
 
     .menuitem{
       cursor: pointer;
@@ -57,6 +54,14 @@ mat-sidenav-container {
 
   mat-toolbar{
     background-color: #202231;
+    position: fixed;
+    z-index: 999;
+  }
+
+  .scrollable-content {
+    margin-top: 60px;
+    overflow-y: auto;
+    height: calc(100vh - 60px);
   }
 }
 

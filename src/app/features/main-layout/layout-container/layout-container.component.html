@@ -29,8 +29,11 @@
         <!-- <span class="textfont cursor-pointer logout" (click)="adminAuthService.LogOut()">Log Out</span> -->
       </div>
     </mat-toolbar>
-    <section class="sidenav-container px-5 py-3">
+    <div class="scrollable-content">
+      <section class="sidenav-container px-5 py-3">
         <router-outlet></router-outlet>
-    </section>
+      </section>
+    </div>
+
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,10 +1,15 @@
 <button type="submit" [disabled]="isLoading" *ngIf="isLoading" class="btn btn-sm"
-  [ngClass]="{'btn-blue': !isCancle,'btn-cancel' : isCancle, 'radius-button' : isRadiusbutton}"
-  [ngStyle]="{'width': width+ '%'}"><i class="fas fa-circle-notch fa-spin"></i>&nbsp;<span>{{load_button_text}}</span>
+  [ngClass]="{'btn-blue': isBlue,'btn-cancel' : isCancle,'btn-edit' : isEdit ,'btn-delete' : isDelete}"
+  [ngStyle]="{'width': width+ '%'}"><i class="fas fa-circle-notch fa-spin me-1" [ngClass]="{'m-0' : isSearch}"></i><span>{{load_button_text}}
+  </span>
 </button>
 
 <button type="submit" *ngIf="!isLoading" class="btn btn-sm" [disabled]="isDisabled"
-  [ngClass]="{'btn-blue': !isCancle,'btn-cancel' : isCancle, 'radius-button' : isRadiusbutton}"
+  [ngClass]="{'btn-blue': isBlue,'btn-cancel' : isCancle,'btn-edit' : isEdit ,'btn-delete' : isDelete}"
   [ngStyle]="{'width': width+ '%'}" (click)="handleClick()">
-  <span>{{button_text}}</span>
+  <span>
+    <i class="fa-solid fa-plus me-1" *ngIf="isAddIcon"></i>
+    <i class="fa fa-refresh refresh" aria-hidden="true" *ngIf="isSearch"></i>
+    {{button_text}}
+  </span>
 </button>

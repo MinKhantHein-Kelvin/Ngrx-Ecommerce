@@ -1,50 +1,89 @@
-import { Component } from '@angular/core';
-import { tableHeader } from '../../../core/models/common';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
+import { PageEvent, tableHeader } from '../../../core/models/common';
+import { UserList } from '../../../core/models/user';
+import { lastValueFrom, Observable } from 'rxjs';
+import { UserService } from '../../../core/services/user.service';
+import { UserModalComponent } from '../../../shared/components/modal/user-modal/user-modal.component';
+import { ModalService } from '../../../core/services/modal.service';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.scss'
+  styleUrl: './user-list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserListComponent {
+export class UserListComponent implements OnInit {
+  userDataList: UserList[] = [];
+  searchVal : string = "";
+  _userService = inject(UserService);
+  cdr = inject(ChangeDetectorRef);
+  modalService = inject(ModalService);
+
+  isLoading: boolean = false;
+
   breadcrumbItems = [
     { label: 'Dashboard', routerLink: ['/admin/dashboard'] },
     { label: 'Products', routerLink: ['/admin/product'] },
-    { label: 'User', routerLink: ['/admin/user'] }
+    { label: 'User', routerLink: ['/admin/user'] },
   ];
 
-  headerArray : tableHeader[] = [
-    { header : 'Code', fieldname : 'code', type : 'text'},
-    { header : 'Name', fieldname : 'name', type : 'text'},
-    { header : 'Title', fieldname : 'title', type : 'text'},
-    { header : 'Desc', fieldname : 'desc', type : 'text'},
-    { header : 'No', fieldname : 'no', type : 'text'},
-    { header : 'Status', fieldname : 'status', type : 'number'}
+  headerArray: tableHeader[] = [
+    { header: 'Name', fieldname: 'name', type: 'text' },
+    { header: 'Email', fieldname: 'email', type: 'text' },
+    { header: 'Phone', fieldname: 'phone', type: 'text' },
+    { header: 'City', fieldname: 'city', type: 'text' },
+    { header: 'Street', fieldname: 'street', type: 'text' },
   ];
 
-  dataSource : any[] = [
-    {
-      code: 'code1',
-      name: 'name1',
-      title: 'title1',
-      desc: 'desc1',
-      no: 'no1',
-      status:'status1'
-    },
-    {
-      code: 'code2',
-      name: 'name2 dasfdsf sdafsdfsf',
-      title: 'title2',
-      desc: 'desc2',
-      no: 'no2',
-      status:'status2'
-    },{
-      code: 'code3',
-      name: 'name3',
-      title: 'title3',
-      desc: 'desc3',
-      no: 'no3',
-      status:'status3'
+  dataSource: UserList[] = [];
+
+  async ngOnInit(): Promise<void> {
+    await this.getAllUser();
+  }
+
+  getAllUser = async (): Promise<void> => {
+    try {
+      this.isLoading = true;
+      const res: UserList[] = await lastValueFrom(
+        this._userService.getAllUsers()
+      );
+      if (res.length > 0) {
+        this.dataSource = res.map((user: any) => ({
+          id: user.id,
+          name: `${user.name.firstname} ${user.name.lastname}`,
+          email: user.email,
+          password: user.password,
+          phone: user.phone,
+          city: user.address.city,
+          street: user.address.street,
+        }));
+      }
+    } catch (error) {
+    } finally {
+      this.isLoading = false;
+      this.cdr.markForCheck();
     }
-  ]
+  };
+
+  onSearch = () => {
+    console.log(this.searchVal);
+
+  }
+
+  OnEdit = (data : UserList) => {
+    console.log(data);
+
+    const modalRef = this.modalService.openModal(UserModalComponent, {
+      size: 'lg', // Options: 'sm' | 'lg' | 'xl'
+    });
+
+    modalRef.componentInstance.title = 'User Information';
+    modalRef.componentInstance.message = 'This is dynamic content!';
+  }
 }

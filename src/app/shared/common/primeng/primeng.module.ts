@@ -9,6 +9,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { PaginatorModule } from 'primeng/paginator';
 
 const PrimengComponents : any = [
   CommonModule,
@@ -20,7 +21,8 @@ const PrimengComponents : any = [
   CalendarModule,
   TableModule,
   CardModule,
-  BreadcrumbModule
+  BreadcrumbModule,
+  PaginatorModule
 ];
 @NgModule({
   declarations: [],

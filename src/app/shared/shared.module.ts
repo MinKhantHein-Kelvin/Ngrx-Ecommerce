@@ -10,6 +10,9 @@ import { MaterialModule } from './common/material/material.module';
 import { TableComponent } from './components/table/table.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { SelectBoxComponent } from './components/select-box/select-box.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { TableSkeletonComponent } from './components/skeleton/table-skeleton/table-skeleton.component';
+import { UserModalComponent } from './components/modal/user-modal/user-modal.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,9 @@ import { SelectBoxComponent } from './components/select-box/select-box.component
     ButtonLoadingComponent,
     TableComponent,
     PaginationComponent,
-    SelectBoxComponent
+    SelectBoxComponent,
+    TableSkeletonComponent,
+    UserModalComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +30,8 @@ import { SelectBoxComponent } from './components/select-box/select-box.component
     ReactiveFormsModule,
     FormsModule,
     PrimeNgModule,
-    MaterialModule
+    MaterialModule,
+    NgxSkeletonLoaderModule
   ],
   exports: [
     InputBoxComponent,
@@ -36,7 +42,9 @@ import { SelectBoxComponent } from './components/select-box/select-box.component
     MaterialModule,
     TableComponent,
     SelectBoxComponent,
-    PaginationComponent
+    PaginationComponent,
+    NgxSkeletonLoaderModule,
+    UserModalComponent
   ]
 })
 export class SharedModule { }

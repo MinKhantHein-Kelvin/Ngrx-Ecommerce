@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { LoginRequest, LoginResponse } from '../models/auth';
 import { Observable } from 'rxjs';
 import { CONSTANTS } from '../constants/constant';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private base_url = "https://fakestoreapi.com/";
+  private base_url = environment.base_url;
 
   constructor(private http : HttpClient) {
 

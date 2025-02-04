@@ -9,10 +9,13 @@
     </div>
   </div>
   }@else {
-  <!-- <label *ngIf="label" class="mb-2">{{ label }} </label>
-  <select class="form-select form-select-sm w-100" [formControl]="control" [disabled]="isDisabled" [(ngModel)]="value" (ngModelChange)="valueChanges($event)">
-    <ng-container *ngFor="let item of options">
-      <option [value]="item[valueKey]">{{ item[labelKey] }}</option>
-    </ng-container>
-  </select> -->
+  <label *ngIf="label" class="mb-2">{{ label }} </label>
+  <input class="form-control"
+    [placeholder]="placeHolder"
+    [type]="type"
+    [(ngModel)]="value"
+    [readOnly]="readOnly"
+    [disabled]="isDisabled"
+    (ngModelChange)="onValueChanges($event)"
+    />
   }
