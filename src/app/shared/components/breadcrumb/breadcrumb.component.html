@@ -1,0 +1,17 @@
+<div class="mt-1">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item ps-0 pe-0" *ngFor="let item of filteredBreadCrumb; let last = last">
+          <a *ngIf="item.url" routerLink="{{item.url}}">
+            {{item.label}}
+          </a>
+          <span *ngIf="!item.url">
+            {{item.label}}
+          </span>
+
+          <i *ngIf="!last" class="fa-solid fa-angle-right text-light arrow-icon"></i>
+          <!-- <i class="fa-solid fa-angle-right"></i> -->
+      </li>
+    </ol>
+  </nav>
+</div>

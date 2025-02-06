@@ -11,6 +11,7 @@ import { lastValueFrom, Observable } from 'rxjs';
 import { UserService } from '../../../core/services/user.service';
 import { UserModalComponent } from '../../../shared/components/modal/user-modal/user-modal.component';
 import { ModalService } from '../../../core/services/modal.service';
+import { BreadCrumb } from '../../../core/models/breadcrumb';
 
 @Component({
   selector: 'app-user-list',
@@ -27,10 +28,9 @@ export class UserListComponent implements OnInit {
 
   isLoading: boolean = false;
 
-  breadcrumbItems = [
-    { label: 'Dashboard', routerLink: ['/admin/dashboard'] },
-    { label: 'Products', routerLink: ['/admin/product'] },
-    { label: 'User', routerLink: ['/admin/user'] },
+  breadcrumbItems: BreadCrumb[] = [
+    { label: 'Dashboard', url: '', ishide: false },
+    { label: 'User List', url: '/admin/user', ishide: false },
   ];
 
   headerArray: tableHeader[] = [
@@ -77,13 +77,10 @@ export class UserListComponent implements OnInit {
   }
 
   OnEdit = (data : UserList) => {
-    console.log(data);
-
     const modalRef = this.modalService.openModal(UserModalComponent, {
-      size: 'lg', // Options: 'sm' | 'lg' | 'xl'
+      size: 'lg',
     });
 
-    modalRef.componentInstance.title = 'User Information';
-    modalRef.componentInstance.message = 'This is dynamic content!';
+    modalRef.componentInstance.userData = data;
   }
 }

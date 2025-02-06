@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, Output, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -8,6 +8,7 @@ import { FormControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectBoxComponent {
+  @Output() valueChange = new EventEmitter<any>();
   @Input() isReactiveForm: boolean = false;
   @Input() control!: FormControl;
   @Input() options: any[] = [];
@@ -18,26 +19,45 @@ export class SelectBoxComponent {
   @Input() errorMessage = '*This field is required.';
   @Input() isEssential : boolean = false;
   @Input() submitted : boolean = false;
+  @Input() readOnly: boolean = false;
+  @Input() value: any = '';
+  @Input() bindLabel: string = '';
+  @Input() bindValue: string = '';
   cdr = inject(ChangeDetectorRef);
 
   ngOnInit(): void {
-    if (this.isReactiveForm && !this.isEssential) {
-      this.control.clearValidators();
+    if (this.isReactiveForm && this.control) {
+      if (!this.isEssential) {
+        this.control.clearValidators();
+        this.control.updateValueAndValidity();
+      }
     }
-    this.control.updateValueAndValidity();
   }
 
   get showError(): boolean {
     return this.control.touched && this.control.invalid || (this.submitted && this.control.invalid);
   }
 
-  ngOnChanges(): void {
-    if (this.isDisabled) {
-      this.control.disable();
-    } else {
-      this.control.enable();
+  ngOnChanges(changes: SimpleChanges): void {
+      if (this.control) {
+        if (this.isDisabled) {
+          this.control.disable();
+        } else {
+          this.control.enable();
+        }
+      }
+      this.cdr.markForCheck();
     }
-    this.cdr.markForCheck();
+
+  onValueChanges(e: any) {
+    if (e !== undefined && e !== null) {
+      this.valueChange.emit(e);
+      this.cdr.markForCheck();
+    }
+  }
+
+  getClearAble = () : boolean => {
+    return this.value !== undefined && this.value !== null && this.value !== '';
   }
 
 }

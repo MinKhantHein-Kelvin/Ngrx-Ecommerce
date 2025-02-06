@@ -2,7 +2,7 @@
   <label class="col-form-label col-form-label-sm"  *ngIf="label">
     {{ label }} <span class="require-color" *ngIf="isEssential">*</span>
   </label>
-  <select class="form-select form-select-sm w-100" [formControl]="control" [disabled]="isDisabled"
+  <select class="form-select form-select-sm w-100 min-width" [formControl]="control" [disabled]="isDisabled"
     [ngClass]="{ 'is-invalid': showError }">
     <ng-container *ngFor="let item of options">
       <option [value]="item[valueKey]">{{ item[labelKey] }}</option>
@@ -15,10 +15,13 @@
   </div>
 
   }@else {
-  <!-- <label *ngIf="label" class="mb-2">{{ label }} </label>
-  <select class="form-select form-select-sm w-100" [formControl]="control" [disabled]="isDisabled" [(ngModel)]="value" (ngModelChange)="valueChanges($event)">
-    <ng-container *ngFor="let item of options">
-      <option [value]="item[valueKey]">{{ item[labelKey] }}</option>
-    </ng-container>
-  </select> -->
+  <label *ngIf="label" class="mb-2">{{ label }} </label>
+  <ng-select [items]="options" class="min-width"
+           [bindLabel]="bindLabel"
+           [bindValue]="bindValue"
+           [disabled]="isDisabled"
+           [clearable]="getClearAble()"
+           [(ngModel)]="value" (ngModelChange)="onValueChanges($event)">
+  </ng-select>
+  <label *ngIf="label" class="mb-2">{{ label }} </label>
   }

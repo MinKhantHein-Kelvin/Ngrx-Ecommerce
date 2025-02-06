@@ -1,4 +1,5 @@
 @import "./themes.scss";
+@import "@ng-select/ng-select/themes/default.theme.css";
 
 .require-color{
   color : var(--error-message-color);
@@ -27,6 +28,7 @@ p-breadcrumb {
     background: none !important;
     border: none !important;
     padding-left: 0 !important;
+    padding: 0.6rem !important;
     ol{
       padding-left: 0 !important;
       a{

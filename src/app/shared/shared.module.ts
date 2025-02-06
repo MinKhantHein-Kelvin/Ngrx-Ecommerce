@@ -5,7 +5,6 @@ import { SharedRoutingModule } from './shared-routing.module';
 import { InputBoxComponent } from './components/input-box/input-box.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonLoadingComponent } from './components/button-loading/button-loading.component';
-import { PrimeNgModule } from './common/primeng/primeng.module';
 import { MaterialModule } from './common/material/material.module';
 import { TableComponent } from './components/table/table.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
@@ -13,6 +12,8 @@ import { SelectBoxComponent } from './components/select-box/select-box.component
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { TableSkeletonComponent } from './components/skeleton/table-skeleton/table-skeleton.component';
 import { UserModalComponent } from './components/modal/user-modal/user-modal.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -22,29 +23,31 @@ import { UserModalComponent } from './components/modal/user-modal/user-modal.com
     PaginationComponent,
     SelectBoxComponent,
     TableSkeletonComponent,
-    UserModalComponent
+    UserModalComponent,
+    BreadcrumbComponent
   ],
   imports: [
     CommonModule,
     SharedRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    PrimeNgModule,
     MaterialModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
+    NgSelectModule
   ],
   exports: [
     InputBoxComponent,
     ButtonLoadingComponent,
     ReactiveFormsModule,
     FormsModule,
-    PrimeNgModule,
     MaterialModule,
     TableComponent,
     SelectBoxComponent,
     PaginationComponent,
     NgxSkeletonLoaderModule,
-    UserModalComponent
+    UserModalComponent,
+    BreadcrumbComponent,
+    NgSelectModule
   ]
 })
 export class SharedModule { }

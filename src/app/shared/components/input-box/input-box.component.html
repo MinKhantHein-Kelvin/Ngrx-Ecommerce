@@ -2,7 +2,7 @@
   <label class="col-form-label col-form-label-sm" *ngIf="label">
     {{ label }} <span class="require-color" *ngIf="isEssential">*</span>
   </label>
-  <input type="text" class="form-control" [formControl]="control" [ngClass]="{ 'is-invalid': showError }"/>
+  <input type="text" class="form-control form-control-sm" [formControl]="control" [ngClass]="{ 'is-invalid': showError }"/>
   <div *ngIf="showError" class="invalid-feedback">
     <div *ngIf="control.hasError('required')" class="error-message">
       {{ errorMessage }}
@@ -10,7 +10,7 @@
   </div>
   }@else {
   <label *ngIf="label" class="mb-2">{{ label }} </label>
-  <input class="form-control"
+  <input class="form-control form-control-sm"
     [placeholder]="placeHolder"
     [type]="type"
     [(ngModel)]="value"
