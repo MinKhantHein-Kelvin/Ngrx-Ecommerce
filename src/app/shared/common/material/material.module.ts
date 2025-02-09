@@ -24,6 +24,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatPaginatorModule} from '@angular/material/paginator';
 
+
 const MaterailComponents : any = [
   MatToolbarModule,
   MatSidenavModule,

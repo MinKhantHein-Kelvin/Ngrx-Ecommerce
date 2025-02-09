@@ -20,7 +20,7 @@
   <div class="row g-0">
     <div class="card">
       <div class="card-body table-overflow">
-        <app-table [tableHeaderArray]="headerArray" [tableDataSource]="dataSource" [isLoading]="isLoading" (editEmitter)="OnEdit($event)"></app-table>
+        <app-table [tableHeaderArray]="headerArray" [tableDataSource]="dataSource" [isLoading]="isLoading" (editEmitter)="OnEdit($event)" [isAction]="true"></app-table>
       </div>
     </div>
   </div>

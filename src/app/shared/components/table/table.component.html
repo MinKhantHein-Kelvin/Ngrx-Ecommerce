@@ -19,10 +19,33 @@
       <tbody *ngIf="tableDataSource.length > 0">
         <tr *ngFor="let row of tableDataSource; let i = index;">
           <td *ngFor="let cell of tableHeaderArray" [ngClass]="{'text-end' : cell.type == 'number'}">
-            <span *ngIf="cell.type !== 'action'">{{ row[cell.fieldname] }}</span>
+            <span *ngIf="cell.type === 'text' || cell.type === 'number'">
+              {{ row[cell.fieldname] }}
+            </span>
+
+            <!-- In rating Column -->
+            <span *ngIf="cell.type === 'rating'">
+              <ngb-rating [rate]="row.rating.rate"
+              [max]="5"
+              [readonly]="true" />
+            </span>
+
+            <!-- In Stock Column -->
+            <span *ngIf="cell.type === 'stock'">
+              <span [ngClass]="{'instock': row.rating.count > 0, 'outstock': row.rating.count === 0}">
+                {{ row.rating.count > 0 ? 'INSTOCK' : 'LOWSTOCK' }}
+              </span>
+            </span>
+
+            <!-- Image Column -->
+            <div *ngIf="cell.type === 'image'" class="image-wrapper">
+              <img [src]="row[cell.fieldname]" alt="Product Image" class="product-img">
+            </div>
+
+            <!-- Action Buttons -->
             <span *ngIf="cell.type === 'action'">
-                <app-button-loading [isEdit]="true" [button_text]="'Edit'" class="me-2" (onClick)="onEdit(row)"></app-button-loading>
-                <app-button-loading [isDelete]="true" [button_text]="'Delete'" (onClick)="onDelete(row)"></app-button-loading>
+              <app-button-loading [isEdit]="true" [button_text]="'Edit'" class="me-2" (onClick)="onEdit(row)"></app-button-loading>
+              <app-button-loading [isDelete]="true" [button_text]="'Delete'" (onClick)="onDelete(row)"></app-button-loading>
             </span>
           </td>
         </tr>

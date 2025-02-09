@@ -1,9 +1,11 @@
-@if (isReactiveForm && control){
-  <label class="col-form-label col-form-label-sm"  *ngIf="label">
+<ng-container *ngIf="isReactiveForm; else templateNgModel">
+  <label class="col-form-label col-form-label-sm" *ngIf="label">
     {{ label }} <span class="require-color" *ngIf="isEssential">*</span>
   </label>
-  <select class="form-select form-select-sm w-100 min-width" [formControl]="control" [disabled]="isDisabled"
-    [ngClass]="{ 'is-invalid': showError }">
+  <select class="form-select form-select-sm w-100 min-width"
+          [formControl]="control"
+          [disabled]="isDisabled"
+          [ngClass]="{ 'is-invalid': showError }">
     <ng-container *ngFor="let item of options">
       <option [value]="item[valueKey]">{{ item[labelKey] }}</option>
     </ng-container>
@@ -13,15 +15,20 @@
       {{ errorMessage }}
     </div>
   </div>
+</ng-container>
 
-  }@else {
-  <label *ngIf="label" class="mb-2">{{ label }} </label>
-  <ng-select [items]="options" class="min-width"
-           [bindLabel]="bindLabel"
-           [bindValue]="bindValue"
-           [disabled]="isDisabled"
-           [clearable]="getClearAble()"
-           [(ngModel)]="value" (ngModelChange)="onValueChanges($event)">
+<!-- Template for ngModel-based form -->
+<ng-template #templateNgModel>
+  <label *ngIf="label" class="mb-2">{{ label }}</label>
+  <ng-select [items]="options"
+             class="min-width"
+             [bindLabel]="bindLabel"
+             [bindValue]="bindValue"
+             [disabled]="isDisabled"
+             [clearable]="getClearAble()"
+             [(ngModel)]="value"
+             (ngModelChange)="onValueChanges($event)"
+             [loading]="isLoading"
+             name="selectBox">
   </ng-select>
-  <label *ngIf="label" class="mb-2">{{ label }} </label>
-  }
+</ng-template>

@@ -12,7 +12,7 @@ export class TableComponent {
   @Input() tableHeaderArray : tableHeader[] = [];
   @Input() tableDataSource : any[] = [];
   @Input() isLoading : boolean = false;
-  @Input() isAction : boolean = true;
+  @Input() isAction : boolean = false;
   @Output() editEmitter = new EventEmitter<any>();
   @Output() deleteEmitter = new EventEmitter<any>();
   cdr = inject(ChangeDetectorRef)

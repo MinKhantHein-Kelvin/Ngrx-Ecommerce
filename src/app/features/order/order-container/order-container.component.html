@@ -1,0 +1,24 @@
+<section>
+  <div class="row">
+    <div class="col-md-12">
+      <app-breadcrumb [breadCrumb]="breadcrumbItems"></app-breadcrumb>
+    </div>
+  </div>
+
+  <div class="row g-0">
+    <div class="d-flex flex-wrap align-items-center">
+      <div class="me-2 mb-2">
+        <app-input-box type="search" [(value)]="searchVal"></app-input-box>
+      </div>
+      <div class="me-2 mb-2">
+        <app-button-loading [width]="'100'" [isBlue]="true" [isSearch]="true" (onClick)="onSearch()"></app-button-loading>
+      </div>
+      <div class="me-2 mb-2">
+        <nz-date-picker nzFormat="dd MMM yyyy" style="min-width: 180px;" [(ngModel)]="fromDate"></nz-date-picker>
+      </div>
+      <div class="me-2 mb-2">
+        <nz-date-picker nzFormat="dd MMM yyyy" style="min-width: 180px;" [(ngModel)]="toDate"></nz-date-picker>
+      </div>
+    </div>
+  </div>
+</section>

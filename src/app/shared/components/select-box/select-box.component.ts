@@ -1,11 +1,18 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, Output, SimpleChanges } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, forwardRef, inject, Input, Output, SimpleChanges } from '@angular/core';
+import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-select-box',
   templateUrl: './select-box.component.html',
   styleUrl: './select-box.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => SelectBoxComponent),
+      multi: true
+    }
+  ]
 })
 export class SelectBoxComponent {
   @Output() valueChange = new EventEmitter<any>();
@@ -23,7 +30,12 @@ export class SelectBoxComponent {
   @Input() value: any = '';
   @Input() bindLabel: string = '';
   @Input() bindValue: string = '';
+  @Input() isLoading : boolean = false;
   cdr = inject(ChangeDetectorRef);
+
+  private onChange: (value: any) => void = () => {};
+  private onTouched: () => void = () => {};
+
 
   ngOnInit(): void {
     if (this.isReactiveForm && this.control) {
@@ -49,15 +61,34 @@ export class SelectBoxComponent {
       this.cdr.markForCheck();
     }
 
-  onValueChanges(e: any) {
-    if (e !== undefined && e !== null) {
-      this.valueChange.emit(e);
-      this.cdr.markForCheck();
+    onValueChanges(e: any) {
+      if (e !== undefined && e !== null) {
+        this.value = e;
+        this.onChange(e); // Notify Angular Forms about the change
+        this.valueChange.emit(e);
+        this.cdr.markForCheck();
+      }
     }
-  }
 
   getClearAble = () : boolean => {
     return this.value !== undefined && this.value !== null && this.value !== '';
   }
 
+  writeValue(value: any): void {
+    this.value = value;
+    this.cdr.markForCheck();
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.isDisabled = isDisabled;
+    this.cdr.markForCheck();
+  }
 }

@@ -23,7 +23,51 @@
   font-style: normal;
   font-size: 16px !important;
   vertical-align: middle;
-  background-color: #f6f6f6;
+  // background-color: #f6f6f6;
   padding-top: 12px !important;
   padding-bottom: 12px !important;
 }
+
+ngb-rating {
+  font-size: 18px;
+  // color: gold;
+}
+
+.rating-text {
+  margin-left: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.instock{
+  background: #DCFCE7;
+  padding: 2px 8px;
+  border-radius: 6px;
+  color: #15803D !important;
+  font-weight: 590;
+  font-size: 12px;
+}
+
+.outstock{
+  background: #FFEDD5;
+  padding: 2px 8px;
+  border-radius: 6px;
+  color: #C2410C !important;
+  font-weight: 590;
+  font-size: 12px;
+}
+
+.image-wrapper{
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  .product-img {
+    width: inherit;
+    height: inherit;
+    object-fit: contain;
+    padding: 10px;
+  }
+}
+
+

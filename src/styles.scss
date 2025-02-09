@@ -1,5 +1,6 @@
 @import "./themes.scss";
 @import "@ng-select/ng-select/themes/default.theme.css";
+@import "bootstrap-icons/font/bootstrap-icons.css";
 
 .require-color{
   color : var(--error-message-color);

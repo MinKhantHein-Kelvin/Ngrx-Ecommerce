@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe, registerLocaleData } from '@angular/common';
 
 import { SharedRoutingModule } from './shared-routing.module';
 import { InputBoxComponent } from './components/input-box/input-box.component';
@@ -14,7 +14,11 @@ import { TableSkeletonComponent } from './components/skeleton/table-skeleton/tab
 import { UserModalComponent } from './components/modal/user-modal/user-modal.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { NgSelectModule } from '@ng-select/ng-select';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AntdModule } from './common/antd/antd.module';
+import en from '@angular/common/locales/en';
+import { en_US, NZ_I18N } from 'ng-zorro-antd/i18n';
+registerLocaleData(en);
 @NgModule({
   declarations: [
     InputBoxComponent,
@@ -33,7 +37,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FormsModule,
     MaterialModule,
     NgxSkeletonLoaderModule,
-    NgSelectModule
+    NgSelectModule,
+    NgbModule,
+    AntdModule
   ],
   exports: [
     InputBoxComponent,
@@ -47,7 +53,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
     NgxSkeletonLoaderModule,
     UserModalComponent,
     BreadcrumbComponent,
-    NgSelectModule
-  ]
+    NgSelectModule,
+    NgbModule,
+    AntdModule
+    // NgxDatesPickerModule
+  ],
+  providers: [DatePipe, { provide: NZ_I18N, useValue: en_US}],
 })
 export class SharedModule { }

@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { AfterViewInit, ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-layout-container',
@@ -6,8 +7,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './layout-container.component.scss',
   changeDetection : ChangeDetectionStrategy.OnPush
 })
-export class LayoutContainerComponent {
+export class LayoutContainerComponent implements AfterViewInit {
   isCollapsed : boolean = false;
+  // private observer = inject(BreakpointObserver);
   sideBarItemList = [
     {
       label: 'Dashboard',
@@ -26,8 +28,31 @@ export class LayoutContainerComponent {
       route: '/admin/user',
       icon: './assets/images/layout/user.png',
       iconActive: './assets/images/layout/user-active.png',
+    },
+    {
+      label: 'Order',
+      route: '/admin/order',
+      icon: './assets/images/layout/order.png',
+      iconActive: './assets/images/layout/order-active.png',
+    },
+    {
+      label: 'Log Out',
+      route: '',
+      icon: './assets/images/layout/logout.png',
+      iconActive: './assets/images/layout/logout.png',
     }
-  ]
+  ];
+  constructor(private observer: BreakpointObserver) {}
+
+  ngAfterViewInit(): void {
+    this.observer.observe(['(max-width:870px)']).subscribe((res) => {
+      if (res?.matches) {
+        this.isCollapsed = true;
+      } else {
+        this.isCollapsed = false;
+      }
+    });
+  }
 
   sidenavWidth(): string {
     return this.isCollapsed ? '60px' : '220px';

@@ -16,15 +16,17 @@
       <app-button-loading [width]="'100'" [isBlue]="true" [button_text]="'Add'" [isAddIcon]="true"></app-button-loading>
     </div>
     <div class="me-2 mb-2">
-      <app-select-box [bindLabel]="'label'" [bindValue]="'value'" [options]="_mainIntercomService.categoriesList"/>
+      <app-select-box [bindLabel]="'label'" [bindValue]="'value'" [options]="_mainIntercomService.categoriesList" [isLoading]="isCategoryLoading" [isDisabled]="isCategoryLoading" [(ngModel)]="category" (valueChange)="onCategoryChange($event)"/>
     </div>
   </div>
 
-  <!-- <div class="row g-0">
+  <div class="row g-0">
     <div class="card">
-      <div class="card-body table-overflow">
-        <app-table [tableHeaderArray]="headerArray" [tableDataSource]="dataSource" [isLoading]="isLoading" (editEmitter)="OnEdit($event)"></app-table>
+      <div class="card-body">
+        <div class="table-overflow">
+          <app-table [tableHeaderArray]="headerArray" [tableDataSource]="productsList" [isLoading]="isLoading" (editEmitter)="OnEdit($event)" [isAction]="true"></app-table>
+        </div>
       </div>
     </div>
-  </div> -->
+  </div>
 </section>
