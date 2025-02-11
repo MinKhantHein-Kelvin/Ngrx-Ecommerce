@@ -4,7 +4,6 @@
 }
 
 #list-table td {
-  white-space: nowrap;
   line-height: normal;
   font-weight: normal;
   font-style: normal;
@@ -18,12 +17,10 @@
 
 #list-table th {
   font-weight: 600 !important;
-  white-space: nowrap;
   line-height: normal;
   font-style: normal;
   font-size: 16px !important;
   vertical-align: middle;
-  // background-color: #f6f6f6;
   padding-top: 12px !important;
   padding-bottom: 12px !important;
 }
@@ -48,7 +45,7 @@ ngb-rating {
   font-size: 12px;
 }
 
-.outstock{
+.outstock,.status{
   background: #FFEDD5;
   padding: 2px 8px;
   border-radius: 6px;

@@ -5,6 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class MainIntercomService {
   categoriesList: Array<string> = [];
+  userObj = {
+    username : ""
+  }
 
   constructor() { }
 }

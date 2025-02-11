@@ -7,7 +7,7 @@
     <mat-divider></mat-divider>
 
     <ng-container *ngFor="let item of sideBarItemList">
-      <div class="pt-3 pb-3 d-flex align-items-center menuitem" mat-button [ngClass]="{'justify-content-center': isCollapsed}"  matTooltip="{{!isCollapsed ? '' : item.label}}" matTooltipPosition="right" [routerLink]="item.route" routerLinkActive="active-menu" [routerLinkActiveOptions]="{ exact: true }">
+      <div class="pt-3 pb-3 d-flex align-items-center menuitem" mat-button [ngClass]="{'justify-content-center': isCollapsed}"  matTooltip="{{!isCollapsed ? '' : item.label}}" matTooltipPosition="right" (click)="handleRoute(item.route)" [routerLink]="item.route" routerLinkActive="active-menu" [routerLinkActiveOptions]="{ exact: true }">
         <div class="ms-4" [ngClass]="{'collese-margin': isCollapsed}">
           <img src="{{item.iconActive}}" alt="icon" class="me-2">
           <span class="ms-2" *ngIf="!isCollapsed">{{item.label}}</span>
@@ -19,14 +19,19 @@
     <mat-toolbar color="primary" class="mat-elevation-z2 d-flex justify-content-between align-items-center"
       [ngClass]="{'toolbar-width': !isCollapsed}">
       <div class="d-flex justify-content-center align-items-center px-3">
-        <button mat-icon-button class="me-2 ms-1" (click)="toggleCollapsed()">
-          <mat-icon class="me-2 text-light" *ngIf="isCollapsed">menu</mat-icon>
-          <mat-icon class="me-2 text-light" *ngIf="!isCollapsed">menu_open</mat-icon>
+        <button mat-icon-button class="me-2 ms-1 menu-icon" (click)="toggleCollapsed()">
+          <mat-icon class="me-2" *ngIf="isCollapsed">menu</mat-icon>
+          <mat-icon class="me-2" *ngIf="!isCollapsed">menu_open</mat-icon>
         </button>
-        <span class="headertitle  text-light">Dashboard</span>
+        <span class="headertitle">Dashboard</span>
       </div>
       <div class="d-flex justify-content-center align-items-center">
-        <!-- <span class="textfont cursor-pointer logout" (click)="adminAuthService.LogOut()">Log Out</span> -->
+        <span class="me-4 username">{{_mainInterComService.userObj.username | uppercase}}</span>
+        <button mat-icon-button class="toogle-icon me-4" (click)="toggleTheme()">
+          <mat-icon class="me-2" *ngIf="!isDarkTheme">light_mode_24</mat-icon>
+          <mat-icon class="me-2" *ngIf="isDarkTheme">dark_mode_24</mat-icon>
+        </button>
+
       </div>
     </mat-toolbar>
     <div class="scrollable-content">

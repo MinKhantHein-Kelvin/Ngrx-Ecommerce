@@ -32,11 +32,10 @@ export class ProductContainerComponent implements OnInit {
   breadcrumbItems: BreadCrumb[] = [
     { label: 'Dashboard', url: '', ishide: false },
     { label: 'Product List', url: '/admin/user', ishide: false },
-  ];
-
+  ]
    headerArray: tableHeader[] = [
     { header: 'Title', fieldname: 'title', type: 'text', width: 30 },
-    { header: 'Image', fieldname: 'image', type: 'image', width: 15 },
+    { header: 'Image', fieldname: 'image', type: 'image', width: 10 },
     { header: 'Price ($)', fieldname: 'price', type: 'number', width: 10 },
     { header: 'Category', fieldname: 'category', type: 'text', width: 15 },
     { header: 'Rating', fieldname: 'rating.rate', type: 'rating', width: 10 },
@@ -72,6 +71,8 @@ export class ProductContainerComponent implements OnInit {
 
   getAllProducts = async () => {
     try {
+      // this.productsList = [];
+      this.isLoading = true;
       let res : Products[] = [];
       if (this.category != '' && this.category != '-') {
         res = await lastValueFrom(
@@ -86,7 +87,6 @@ export class ProductContainerComponent implements OnInit {
       if (res.length > 0) {
         this.productsList = res;
       }
-      console.log(this.productsList);
 
     } catch (error) {
     } finally {

@@ -34,11 +34,11 @@ export class UserListComponent implements OnInit {
   ];
 
   headerArray: tableHeader[] = [
-    { header: 'Name', fieldname: 'name', type: 'text' },
-    { header: 'Email', fieldname: 'email', type: 'text' },
-    { header: 'Phone', fieldname: 'phone', type: 'text' },
-    { header: 'City', fieldname: 'city', type: 'text' },
-    { header: 'Street', fieldname: 'street', type: 'text' },
+    { header: 'Name', fieldname: 'name', type: 'text', width : 15 },
+    { header: 'Email', fieldname: 'email', type: 'text', width : 20 },
+    { header: 'Phone', fieldname: 'phone', type: 'text', width : 15 },
+    { header: 'City', fieldname: 'city', type: 'text', width : 15 },
+    { header: 'Street', fieldname: 'street', type: 'text', width : 15 },
   ];
 
   dataSource: UserList[] = [];

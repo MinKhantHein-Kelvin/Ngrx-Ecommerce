@@ -1,5 +1,9 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { AfterViewInit, ChangeDetectionStrategy, Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
+import { ThemeService } from '../../../core/services/theme.service';
+import { MainIntercomService } from '../../../core/services/main-intercom.service';
 
 @Component({
   selector: 'app-layout-container',
@@ -7,9 +11,14 @@ import { AfterViewInit, ChangeDetectionStrategy, Component } from '@angular/core
   styleUrl: './layout-container.component.scss',
   changeDetection : ChangeDetectionStrategy.OnPush
 })
-export class LayoutContainerComponent implements AfterViewInit {
+export class LayoutContainerComponent implements AfterViewInit,OnInit {
   isCollapsed : boolean = false;
-  // private observer = inject(BreakpointObserver);
+  isDarkTheme : boolean = false;
+  cdr = inject(ChangeDetectorRef)
+  router = inject(Router);
+  private _authService = inject(AuthService);
+  private _themeService = inject(ThemeService);
+  public _mainInterComService = inject(MainIntercomService)
   sideBarItemList = [
     {
       label: 'Dashboard',
@@ -44,6 +53,16 @@ export class LayoutContainerComponent implements AfterViewInit {
   ];
   constructor(private observer: BreakpointObserver) {}
 
+  ngOnInit(): void {
+    this.isDarkTheme = document.body.classList.contains('dark-mode');
+  }
+
+  toggleTheme() {
+    this._themeService.toggleTheme();
+    this.isDarkTheme = !this.isDarkTheme;
+    this.cdr.detectChanges();
+  }
+
   ngAfterViewInit(): void {
     this.observer.observe(['(max-width:870px)']).subscribe((res) => {
       if (res?.matches) {
@@ -51,6 +70,7 @@ export class LayoutContainerComponent implements AfterViewInit {
       } else {
         this.isCollapsed = false;
       }
+      this.cdr.markForCheck();
     });
   }
 
@@ -60,5 +80,13 @@ export class LayoutContainerComponent implements AfterViewInit {
 
   toggleCollapsed(): void {
     this.isCollapsed = !this.isCollapsed;
+  }
+
+  handleRoute = (route: string) : void => {
+    if(route !== ''){
+      this.router.navigate([route]);
+    }else{
+      this._authService.logout();
+    }
   }
 }

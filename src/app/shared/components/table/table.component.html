@@ -4,7 +4,7 @@
     <table class="table gy-5" id="list-table">
       <thead>
         <tr class="fw-bold">
-          <th scope="col" *ngFor="let item of tableHeaderArray" [ngClass]="{'text-end' : item.type == 'number'}" [ngStyle]="{ width: item.width+'%' }">
+          <th scope="col" *ngFor="let item of tableHeaderArray" [ngClass]="{'text-end' : item.type == 'number'}" [ngStyle]="{ width: item.width+'%', whiteSpace: item.fieldname === 'action' ? 'nowrap' : 'normal'}">
             {{ item.header }}
           </th>
         </tr>
@@ -18,9 +18,14 @@
       </tbody>
       <tbody *ngIf="tableDataSource.length > 0">
         <tr *ngFor="let row of tableDataSource; let i = index;">
-          <td *ngFor="let cell of tableHeaderArray" [ngClass]="{'text-end' : cell.type == 'number'}">
-            <span *ngIf="cell.type === 'text' || cell.type === 'number'">
+          <td *ngFor="let cell of tableHeaderArray" [ngClass]="{'text-end' : cell.type == 'number'}" [ngStyle]="{ whiteSpace: cell.type === 'action' ? 'nowrap' : 'normal'}">
+            <span *ngIf="cell.type === 'text' || cell.type === 'number' || cell.type === 'status'" [ngClass]="{'status' : cell.type === 'status'}">
               {{ row[cell.fieldname] }}
+            </span>
+
+            <!-- In Date Column -->
+            <span *ngIf="cell.type === 'date'">
+              {{ row[cell.fieldname] | date:'dd MMM yyyy' }}
             </span>
 
             <!-- In rating Column -->

@@ -9,12 +9,12 @@ export class Client {
   //   return momentDate.format('DD MMM YYYY');
   // }
 
-  // changedateobjecttostring(date: Date): string {
-  //   if (date) {
-  //     return moment(date).format('YYYY-MM-DD');
-  //   }
-  //   return '';
-  // }
+  changeDateObjectToString(date: Date): string {
+    if (date) {
+      return moment(date).format('YYYY-MM-DD');
+    }
+    return '';
+  }
 
   // changedatetimeobjecttostring(date: Date): string {
   //   if (date) {

@@ -1,10 +1,11 @@
 mat-sidenav-container {
   height: 100vh;
-  background: hsl(233, 21%, 16%);
+  background: var(--main-container-background-color);
   position: relative;
 
   mat-sidenav{
-    background-color: var(--secondary-color);
+    background: #2A2D3E;
+    // color: var(--white-color);
     border-radius: 0px;
 
     .image-wrapper{
@@ -26,7 +27,7 @@ mat-sidenav-container {
 
     .menuitem{
       cursor: pointer;
-      color: #FFFFFF;
+      color: #f5f5f5;
       opacity: 0.7;
 
       &:hover{
@@ -53,9 +54,32 @@ mat-sidenav-container {
   }
 
   mat-toolbar{
-    background-color: #202231;
+    background-color: var(--main-container-background-color);
+    color: var(--text-color);
     position: fixed;
     z-index: 999;
+    width: calc(100vw - 60px) !important;
+
+    .menu-icon{
+      color: var(--text-color);
+    }
+
+    .toogle-icon{
+      background-color: var(--text-color);
+      color: var(--primary-color);
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    .username{
+      font-weight: 600;
+      color: var(--text-color);
+      font-size: 18px;
+    }
+  }
+
+  .toolbar-width{
+    width: calc(100vw - 220px) !important;
   }
 
   .scrollable-content {

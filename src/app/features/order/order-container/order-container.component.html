@@ -14,11 +14,22 @@
         <app-button-loading [width]="'100'" [isBlue]="true" [isSearch]="true" (onClick)="onSearch()"></app-button-loading>
       </div>
       <div class="me-2 mb-2">
-        <nz-date-picker nzFormat="dd MMM yyyy" style="min-width: 180px;" [(ngModel)]="fromDate"></nz-date-picker>
+        <nz-date-picker nzFormat="dd MMM yyyy" style="min-width: 180px;" [(ngModel)]="startDate"></nz-date-picker>
       </div>
       <div class="me-2 mb-2">
-        <nz-date-picker nzFormat="dd MMM yyyy" style="min-width: 180px;" [(ngModel)]="toDate"></nz-date-picker>
+        <nz-date-picker nzFormat="dd MMM yyyy" style="min-width: 180px;" [(ngModel)]="endDate"></nz-date-picker>
       </div>
     </div>
+
+    <div class="row g-0">
+      <div class="card">
+        <div class="card-body">
+          <div class="table-overflow">
+            <app-table [tableHeaderArray]="headerArray" [tableDataSource]="ordersList" [isLoading]="isLoading"></app-table>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>

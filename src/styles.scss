@@ -21,24 +21,11 @@
   overflow-x: auto;
 }
 
-p-breadcrumb {
-  color: var(--white-color) !important;
-  font-size: 14px;
-  background: black;
-  nav{
-    background: none !important;
-    border: none !important;
-    padding-left: 0 !important;
-    padding: 0.6rem !important;
-    ol{
-      padding-left: 0 !important;
-      a{
-        text-decoration: none !important;
-        color: var(--white-color) !important;
-      }
-    }
-  }
-}
-
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
