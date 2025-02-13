@@ -27,9 +27,9 @@
       </div>
       <div class="d-flex justify-content-center align-items-center">
         <span class="me-4 username">{{_mainInterComService.userObj.username | uppercase}}</span>
-        <button mat-icon-button class="toogle-icon me-4" (click)="toggleTheme()">
-          <mat-icon class="me-2" *ngIf="!isDarkTheme">light_mode_24</mat-icon>
-          <mat-icon class="me-2" *ngIf="isDarkTheme">dark_mode_24</mat-icon>
+        <button mat-mini-fab class="toogle-icon me-4" (click)="toggleTheme()">
+          <mat-icon *ngIf="isDarkTheme">light_mode_24</mat-icon>
+          <mat-icon *ngIf="!isDarkTheme">dark_mode_24</mat-icon>
         </button>
 
       </div>
