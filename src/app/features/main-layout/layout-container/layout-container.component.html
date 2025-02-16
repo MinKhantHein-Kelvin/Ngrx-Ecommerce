@@ -26,11 +26,23 @@
         <span class="headertitle">Dashboard</span>
       </div>
       <div class="d-flex justify-content-center align-items-center">
-        <span class="me-4 username">{{_mainInterComService.userObj.username | uppercase}}</span>
+        <button mat-button class="download-app me-4" *ngIf="showInstallButton" (click)="installPWA()">
+          <mat-icon class="me-2">download_24</mat-icon>
+          <span>App</span>
+        </button>
+        <!-- <span class="me-3 d-flex justify-content-center align-items-center">
+          <mat-icon *ngIf="isDarkTheme" class="toogle-icon" (click)="toggleTheme()">light_mode_24</mat-icon>
+          <mat-icon *ngIf="!isDarkTheme" class="toogle-icon" (click)="toggleTheme()">dark_mode_24</mat-icon>
+        </span> -->
+
         <button mat-mini-fab class="toogle-icon me-4" (click)="toggleTheme()">
           <mat-icon *ngIf="isDarkTheme">light_mode_24</mat-icon>
           <mat-icon *ngIf="!isDarkTheme">dark_mode_24</mat-icon>
         </button>
+        <span class="me-4 username d-flex justify-content-center align-items-center">
+          {{_mainInterComService.userObj.username | uppercase}}
+          <mat-icon >arrow_drop_down_24</mat-icon>
+        </span>
 
       </div>
     </mat-toolbar>

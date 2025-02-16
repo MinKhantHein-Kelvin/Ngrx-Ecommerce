@@ -1,5 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { ThemeService } from '../../../core/services/theme.service';
@@ -12,6 +12,8 @@ import { MainIntercomService } from '../../../core/services/main-intercom.servic
   changeDetection : ChangeDetectionStrategy.OnPush
 })
 export class LayoutContainerComponent implements AfterViewInit,OnInit {
+  deferredPrompt: any;
+  showInstallButton = false;
   isCollapsed : boolean = false;
   isDarkTheme : boolean = false;
   cdr = inject(ChangeDetectorRef)
@@ -51,6 +53,15 @@ export class LayoutContainerComponent implements AfterViewInit,OnInit {
       iconActive: './assets/images/layout/logout.png',
     }
   ];
+
+  @HostListener('window:beforeinstallprompt', ['$event'])
+
+
+  onBeforeInstallPrompt(event: Event) {
+    event.preventDefault();
+    this.deferredPrompt = event;
+    this.showInstallButton = true; // Show the "Download" button
+  }
   constructor(private observer: BreakpointObserver) {}
 
   ngOnInit(): void {
@@ -87,6 +98,20 @@ export class LayoutContainerComponent implements AfterViewInit,OnInit {
       this.router.navigate([route]);
     }else{
       this._authService.logout();
+    }
+  }
+
+  installPWA() {
+    if (this.deferredPrompt) {
+      this.deferredPrompt.prompt();
+      this.deferredPrompt.userChoice.then((choiceResult: any) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the PWA install prompt');
+        } else {
+          console.log('User dismissed the PWA install prompt');
+        }
+        this.deferredPrompt = null;
+      });
     }
   }
 }
